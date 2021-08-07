@@ -1,0 +1,33 @@
+
+<div class="form-group row" style="margin-left: 1rem;">
+<div class="form-group row">
+    <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Search</label>
+    <div class="col-sm-6">
+        <input type="text" [(ngModel)]="searchValue" class="form-control" id="search"/>
+    </div>
+</div>
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">ExpiryDate</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let medicine of Medicines | searchFilter: searchValue" 
+        [ngClass]="{'class2': medicine.quantity<10, 
+                    'class1': getDateDiff(medicine.expiryDate)<30}">
+            
+            <td>{{ medicine.fullName }}</td>
+            <td>{{ medicine.brand }}</td>
+            <td>{{ medicine.price }}</td>
+            <td>{{medicine.quantity}}</td>
+            <td>{{medicine.expiryDate | date: 'dd-MM-yyyy'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
